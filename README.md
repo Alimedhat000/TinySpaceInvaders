@@ -31,3 +31,14 @@ This is a simple Space Invaders clone built with C++, utilizing **SFML** (Simple
 ```bash
 git clone https://github.com/yourusername/space-invaders-clone.git
 cd space-invaders-clone
+```
+### Building the Project
+Use a Makefile or directly compile with the following command:
+```bash
+g++ main.cpp Player.cpp Animation.cpp -o SpaceInvaders -lsfml-graphics -lsfml-window -lsfml-system
+```
+### Running the Game 
+After building the project, you can run the game with:
+```bash
+./SpaceInvaders
+```

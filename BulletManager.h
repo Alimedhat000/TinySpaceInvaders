@@ -4,18 +4,33 @@
 #include <vector>
 #include <iostream>
 
+// The BulletManager class manages multiple bullets, handling their creation, updating, 
+// rendering, and removing when they go off-screen.
 class BulletManager {
 public:
+    // Constructor: Initializes the manager with a texture and bullet speed.
     BulletManager(const sf::Texture& texture, float bulletSpeed);
 
-    void shoot(const sf::Vector2f& position); // Create a new bullet
-    void update(float deltaTime); // Update all bullets
-    void draw(sf::RenderWindow& window); // Draw all bullets
+    // Shoots a new bullet from the given position.
+    void shoot(const sf::Vector2f& position);
 
-    const std::vector<Bullet>& getBullets() const; // Get current bullets
+    // Updates the position of all bullets and removes any that go off-screen.
+    void update(float deltaTime);
+
+    // Draws all active bullets to the window.
+    void draw(sf::RenderWindow& window);
+
+    // Returns a constant reference to the current list of bullets.
+    std::vector<Bullet>& getBullets(); // Non-const reference
+
 
 private:
-    std::vector<Bullet> bullets; // List of bullets
-    sf::Texture bulletTexture; // Bullet texture
-    float bulletSpeed; // Speed of the bullets
+    // List of active bullets being managed.
+    std::vector<Bullet> bullets;
+
+    // Texture used for each bullet.
+    sf::Texture bulletTexture;
+
+    // Speed at which bullets move.
+    float bulletSpeed;
 };

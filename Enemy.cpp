@@ -12,8 +12,6 @@ Enemy::Enemy(sf::Texture* texture, sf::Texture* deathTexture, float speed, sf::V
     EnemyShape.setPosition(Position);
     EnemyShape.setTexture(EnemyTexture);
 
-    DeathTexture->loadFromFile("./Assets/Images/Explosion.png");
-
     // Initialize Direction to Right 
     Direction = 1;
 

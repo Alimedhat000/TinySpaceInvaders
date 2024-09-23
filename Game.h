@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Global.h"
 #include "Player.h"
 #include "BulletManager.h"
 #include "ResourceManager.h"

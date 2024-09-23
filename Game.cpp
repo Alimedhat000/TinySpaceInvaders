@@ -4,12 +4,12 @@
 Game::Game() :
     window(sf::VideoMode(ScreenHeight, ScreenWidth), "TinySpaceInvaders",
         sf::Style::Close | sf::Style::Titlebar), // Create a window with the given size and title.
-    bulletmanager(ResourceManager::getInstance().getTexture("./Assets/Images/PlayerBullet.png"), 300.0f), // Initialize bullet manager with texture and speed.
-    player(&ResourceManager::getInstance().getTexture("./Assets/Images/Player.png"), 0.1f, sf::Vector2f(PlayerStartingX, PlayerStartingY), bulletmanager) // Initialize player with texture, speed, position, and bullet manager.
-    , enemymanager(&ResourceManager::getInstance().getTexture("./Assets/Images/Explosion.png"), 100.f)
+    bulletmanager(ResourceManager::getInstance().getTexture(PlAYER_BULLET__FILEPATH), 300.0f), // Initialize bullet manager with texture and speed.
+    player(&ResourceManager::getInstance().getTexture(PlAYER_FILEPATH), 0.1f, sf::Vector2f(PlayerStartingX, PlayerStartingY), bulletmanager) // Initialize player with texture, speed, position, and bullet manager.
+    , enemymanager(&ResourceManager::getInstance().getTexture(ENEMY_EXPLOSION_FILEPATH), 100.f)
 {
     // Set the texture for the background and scale it to fit the window.
-    SpaceBackground.setTexture(ResourceManager::getInstance().getTexture("./Assets/Images/Background.png"));
+    SpaceBackground.setTexture(ResourceManager::getInstance().getTexture(BACKGROUND_FILEPATH));
     SpaceBackground.scale(3.375f, 4.0f); // Adjust the background to cover the entire window.
 }
 

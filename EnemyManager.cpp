@@ -4,9 +4,9 @@ EnemyManager::EnemyManager(sf::Texture* texture, float speed)
     : enemySpeed(speed), DeathTexture(texture), NumberOfDeaths(0) {
 
     std::map<unsigned char, std::string> texturePaths = {
-        {0, "./Assets/Images/Enemy0.png"},
-        {1, "./Assets/Images/Enemy1.png"},
-        {2, "./Assets/Images/Enemy2.png"}
+        {0, ENEMY_0_FILEPATH},
+        {1, ENEMY_1_FILEPATH},
+        {2, ENEMY_2_FILEPATH}
     };
 
 

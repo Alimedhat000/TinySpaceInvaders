@@ -143,6 +143,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -153,10 +154,35 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletManager.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResourceManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Images\Background.png" />
+    <Image Include="Assets\Images\Enemy0.png" />
+    <Image Include="Assets\Images\Enemy1.png" />
+    <Image Include="Assets\Images\Enemy2.png" />
+    <Image Include="Assets\Images\EnemyBullet.png" />
+    <Image Include="Assets\Images\Explosion.png" />
+    <Image Include="Assets\Images\ExplosionBig.png" />
+    <Image Include="Assets\Images\Font.png" />
+    <Image Include="Assets\Images\Player.png" />
+    <Image Include="Assets\Images\PlayerBullet.png" />
+    <Image Include="Assets\Images\Powerup0.png" />
+    <Image Include="Assets\Images\Powerup1.png" />
+    <Image Include="Assets\Images\Powerup2.png" />
+    <Image Include="Assets\Images\Powerup3.png" />
+    <Image Include="Assets\Images\PowerupBar.png" />
+    <Image Include="Assets\Images\Ufo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\Sounds\bang.wav" />
+    <Media Include="Assets\Sounds\explosion.wav" />
+    <Media Include="Assets\Sounds\invaderkilled.wav" />
+    <Media Include="Assets\Sounds\shoot.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -20,11 +20,11 @@ Player::Player(sf::Texture* texture, float speed, sf::Vector2f Position, BulletM
 void Player::HandleInput()
 {
     // Move player left when 'A' key is pressed.
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) && playerShape.getPosition().x > GlobalSize) {
         playerShape.move(-speed, 0.0f); // Move left
     }
     // Move player right when 'D' key is pressed.
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) && playerShape.getPosition().x < ScreenHeight - GlobalSize) {
         playerShape.move(speed, 0.0f); // Move right
     }
     // Shoot a bullet when the space bar is pressed and cooldown allows.

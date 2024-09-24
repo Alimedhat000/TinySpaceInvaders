@@ -33,8 +33,12 @@ public:
 
     void adjustSpeed();
 
+    int getDeathNumber()const;
+    int getCurLevel()const;
 
 
+
+    BulletManager EnemyBullet;
 
 private:
 
@@ -42,13 +46,17 @@ private:
     const float SPEED_INCREMENT = 2.f; // Speed increment per death
 
     int Direction; // 1 for right, -1 for left
+    float horizontalMovement;
     float moveDownAmount{ 01.f };
     sf::Clock clock;
     Sound sound;
-    BulletManager EnemyBullet;
+
     sf::Texture* DeathTexture;
     std::vector<Enemy> enemies; // Stores all active enemies
     float enemySpeed; // Base speed for enemies
     std::map<unsigned char, sf::Texture> enemyTextures; // Textures for the enemies
+    int TotalNumberOfDeaths;
     int NumberOfDeaths;
+
+    int CurLevel{ 1 };
 };

@@ -85,6 +85,7 @@ void EnemyManager::update(float deltaTime, sf::Vector2f PlayerPosition) {
         if (enemy.GetShootCoolDown() <= 0) {
             if (enemy.ShouldShoot(PlayerPosition)) {
                 EnemyBullet.shoot(enemy.GetPosition());
+                sound.PlayEnemyShootSound(); // play Shooting sound
             }
             enemy.SetShootCoolDown(enemy.GetMaxShootCoolDown());
         }
@@ -92,7 +93,7 @@ void EnemyManager::update(float deltaTime, sf::Vector2f PlayerPosition) {
 
         enemy.Update(deltaTime);
         enemy.SetSpeed(enemySpeed);
-        float horizontalMovement = (Direction * (enemySpeed + SPEED_INCREMENT * NumberOfDeaths)) * deltaTime;
+        horizontalMovement = (Direction * (enemySpeed + CurLevel * SPEED_INCREMENT * NumberOfDeaths)) * deltaTime;
         enemy.SetPosition({ enemy.GetPosition().x + horizontalMovement, enemy.GetPosition().y });
     }
 
@@ -110,8 +111,14 @@ void EnemyManager::update(float deltaTime, sf::Vector2f PlayerPosition) {
     enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [&](Enemy& enemy) {
         // Check if the enemy is dead and the time since death exceeds 1000 milliseconds 
         // To ensure that death Animation is Finished
-        return enemy.IsDead() && (elapsedTime.asMilliseconds() - enemy.getDeadTime()) > 1000;
+        return enemy.IsDead() && (elapsedTime.asMilliseconds() - enemy.getDeadTime()) > 500;
         }), enemies.end());
+    if (NumberOfDeaths == 90)
+    {
+        CurLevel++;
+        NumberOfDeaths = 0;
+        GenerateEnemies(6, 15, 2);
+    }
 }
 
 
@@ -139,6 +146,7 @@ std::vector<Enemy>& EnemyManager::getEnemies() {
 
 void EnemyManager::incrementDeathCount() {
     NumberOfDeaths++;
+    TotalNumberOfDeaths++;
     // adjusting the speed based on Number of Deaths
     adjustSpeed();
 }
@@ -146,4 +154,13 @@ void EnemyManager::incrementDeathCount() {
 void EnemyManager::adjustSpeed() {
     //increase speed by a factor based on the number of deaths
     enemySpeed = BASE_SPEED + (NumberOfDeaths * SPEED_INCREMENT); // BASE_SPEED and SPEED_INCREMENT are defined constants
+}
+
+int EnemyManager::getDeathNumber() const
+{
+    return TotalNumberOfDeaths;
+}
+
+int EnemyManager::getCurLevel()const {
+    return CurLevel;
 }

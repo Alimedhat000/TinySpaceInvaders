@@ -3,42 +3,28 @@
 This is a simple Space Invaders clone built with C++, utilizing **SFML** (Simple and Fast Multimedia Library). The project is aimed at practicing **Object-Oriented Programming (OOP)** principles in C++ and improving skills with the **SFML** library for game development.
 
 ## Features
-- Basic player movement using the keyboard and mouse.
-- Simple animation system for player sprites.
-- Object-Oriented structure for players and future enemies/bullets.
-- Modular code with separate classes for game entities like `Player` and `Animation`.
-- Expandable structure to add enemies, projectiles, and more game features.
+- Basic player movement using the keyboard.
+- Simple animation system for player and enemies.
+- Multiple enemy types with unique Textures.
+- Bullet collision detection with enemies.
+- Enemy random shooting mechanics.
+- Sound effects for an enhanced gaming experience.
+- Object-Oriented structure.
+- Expandable structure to add more game features.
 
 ## Screenshots
-*(Include screenshots of the game here if available)*
+![image_2024-09-24_090442843](https://github.com/user-attachments/assets/fb738213-f71e-4382-bc73-5a49f128d38e)
 
-## Installation & Setup
+![SpaceInvaders](https://github.com/user-attachments/assets/a89e9f6e-a44b-4b29-86a1-4f4be026d51b)
 
-### Prerequisites
+## Prerequisites 
 - C++ compiler (like `g++`)
-- **SFML** library (version 2.5 or above)
+- **SFML** library
 
-### Installing SFML
-1. Install SFML on your system:
-   - On Linux (Debian/Ubuntu):
-     ```bash
-     sudo apt-get install libsfml-dev
-     ```
-   - On Windows:
-     Follow [SFML's official guide](https://www.sfml-dev.org/tutorials/2.5/start-vc.php) to install the library.
+## To play The Game
+Download the latest release and launch `mySpaceInvaders.exe`
 
 ### Cloning the Repository
 ```bash
-git clone https://github.com/yourusername/space-invaders-clone.git
-cd space-invaders-clone
-```
-### Building the Project
-Use a Makefile or directly compile with the following command:
-```bash
-g++ main.cpp Player.cpp Animation.cpp -o SpaceInvaders -lsfml-graphics -lsfml-window -lsfml-system
-```
-### Running the Game 
-After building the project, you can run the game with:
-```bash
-./SpaceInvaders
-```
+git clone https://github.com/Alimedhat000/TinySpaceInvaders.git
+cd TinySpaceInvaders

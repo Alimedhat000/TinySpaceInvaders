@@ -9,7 +9,7 @@ class Bullet
 {
 public:
     // Constructor: Initializes the bullet with a texture, speed, and starting position.
-    Bullet(sf::Texture* texture, float speed, sf::Vector2f Position);
+    Bullet(sf::Texture* texture, float speed, sf::Vector2f Position, bool Direction);
 
     // Updates the position of the bullet based on the time elapsed.
     void Update(float deltaTime);
@@ -29,4 +29,6 @@ private:
 
     // The speed at which the bullet travels (negative direction along the Y-axis).
     float speed;
+
+    bool Direction;
 };

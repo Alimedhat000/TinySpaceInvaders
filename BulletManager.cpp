@@ -1,12 +1,12 @@
 #include "BulletManager.h"
 
 // Constructor: Sets the bullet texture and speed for the manager.
-BulletManager::BulletManager(const sf::Texture& texture, float bulletSpeed)
-    : bulletTexture(texture), bulletSpeed(bulletSpeed) {}
+BulletManager::BulletManager(const sf::Texture& texture, float bulletSpeed, bool Direction)
+    : bulletTexture(texture), bulletSpeed(bulletSpeed), Direction(Direction) {}
 
 // Creates a new bullet at the given position and adds it to the bullets list.
 void BulletManager::shoot(const sf::Vector2f& position) {
-    bullets.emplace_back(&bulletTexture, bulletSpeed, position); // Create a new bullet and push it to bullets vector.
+    bullets.emplace_back(&bulletTexture, bulletSpeed, position, Direction); // Create a new bullet and push it to bullets vector.
     //std::cout << "Pew Pew!\n"; // Debug message for shooting.
 }
 

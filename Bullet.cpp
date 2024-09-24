@@ -1,8 +1,9 @@
 #include "Bullet.h"
 
 // Constructor: Initializes the bullet's speed, sets the texture, and places the bullet at the given position.
-Bullet::Bullet(sf::Texture* texture, float speed, sf::Vector2f Position)
+Bullet::Bullet(sf::Texture* texture, float speed, sf::Vector2f Position, bool Direction)
 {
+    this->Direction = Direction;
     this->speed = speed; // Set the speed of the bullet.
     BulletSprite.setTexture(*texture); // Set the texture for the bullet's sprite.
     BulletSprite.setPosition(Position); // Set the initial position of the bullet.
@@ -13,7 +14,15 @@ Bullet::Bullet(sf::Texture* texture, float speed, sf::Vector2f Position)
 void Bullet::Update(float deltaTime)
 {
     // Move the bullet upwards by modifying its Y position.
-    BulletSprite.move(0.f, deltaTime * -speed); // Negative speed moves the bullet up the screen.
+    if (Direction)
+    {
+        BulletSprite.move(0.f, deltaTime * -speed); // Negative speed moves the bullet up the screen.
+    }
+    else
+    {
+        BulletSprite.move(0.f, deltaTime * speed); // Negative speed moves the bullet up the screen.
+    }
+
 }
 
 // Draws the bullet sprite onto the given window.

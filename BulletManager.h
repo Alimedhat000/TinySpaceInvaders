@@ -9,7 +9,7 @@
 class BulletManager {
 public:
     // Constructor: Initializes the manager with a texture and bullet speed.
-    BulletManager(const sf::Texture& texture, float bulletSpeed);
+    BulletManager(const sf::Texture& texture, float bulletSpeed, bool Direction);
 
     // Shoots a new bullet from the given position.
     void shoot(const sf::Vector2f& position);
@@ -33,4 +33,6 @@ private:
 
     // Speed at which bullets move.
     float bulletSpeed;
+
+    bool Direction;
 };

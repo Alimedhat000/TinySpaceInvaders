@@ -63,6 +63,8 @@ private:
     // Speed at which the Enemy moves.
     float speed;
 
+    float hitBoxScale{ 0.3f };
+
     // Rectangle shape used to represent the Enemy.
     sf::RectangleShape EnemyShape;
 

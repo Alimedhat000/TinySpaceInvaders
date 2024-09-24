@@ -2,7 +2,9 @@
 
 // Constructor: Initializes the player with texture, speed, initial position, and a reference to the bullet manager.
 Player::Player(sf::Texture* texture, float speed, sf::Vector2f Position, BulletManager& bulletmanager)
-    : playerTexture(texture), speed(speed), bulletmanager(bulletmanager), animation(texture, sf::Vector2u(5, 1), SwitchToNextTime) // Initialize animation with texture and image count.
+    : playerTexture(texture), speed(speed), bulletmanager(bulletmanager),
+    animation(texture, sf::Vector2u(5, 1), SwitchToNextTime) // Initialize animation with texture and image count.
+    , sound()
 {
     // Set the size of the player, origin point, texture, and initial position.
     playerShape.setSize(sf::Vector2f(GlobalSize, GlobalSize)); // Set player's width and height.
@@ -76,6 +78,9 @@ void Player::shoot(BulletManager& bulletmanager)
     sf::Vector2f bulletPosition = playerShape.getPosition();
     bulletPosition.x -= 40.f / 2 - 9.0f; // Center the bullet's X position relative to the player (The 9.0f is an offset to better center the Bullet). 
     bulletPosition.y -= 40.f / 2; // Center the bullet's Y position relative to the player.
+
+    //Play Shooting SoundEffect
+    sound.PlayShootSound();
 
     // Pass the bullet position to the BulletManager for firing.
     bulletmanager.shoot(bulletPosition);

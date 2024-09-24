@@ -1,8 +1,9 @@
 #include "EnemyManager.h"
 
 EnemyManager::EnemyManager(sf::Texture* texture, float speed)
-    : enemySpeed(speed), DeathTexture(texture), NumberOfDeaths(0) {
-
+    : enemySpeed(speed), DeathTexture(texture), NumberOfDeaths(0)
+    , sound()
+{
     std::map<unsigned char, std::string> texturePaths = {
         {0, ENEMY_0_FILEPATH},
         {1, ENEMY_1_FILEPATH},
@@ -54,6 +55,9 @@ void EnemyManager::update(float deltaTime) {
         enemy.Update(deltaTime); // Update each enemy's state
         enemy.SetSpeed(enemySpeed);
     }
+    sound.SetEnemyMoveSoundSpeed(NumberOfDeaths);
+    sound.PlayEnemyMoveSound();
+
 }
 
 void EnemyManager::draw(sf::RenderWindow& window) {

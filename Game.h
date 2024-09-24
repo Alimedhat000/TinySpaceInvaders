@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Global.h"
+#include "Sound.h"
 #include "Player.h"
 #include "BulletManager.h"
 #include "ResourceManager.h"
@@ -45,6 +46,9 @@ private:
 
     // Manages all the enemies
     EnemyManager enemymanager;
+
+    //Manages and Plays all The sounds
+    Sound sound;
 
     // Tracks time between frames to ensure smooth movement and animation.
     sf::Clock clock;

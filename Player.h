@@ -1,6 +1,7 @@
 #pragma once
 #include "Animation.h"
 #include "SFML/Graphics.hpp"
+#include "Sound.h"
 #include "Global.h"
 #include "BulletManager.h"
 #include <vector>
@@ -37,6 +38,8 @@ public:
 private:
     // Handles animation frames for the player sprite.
     Animation animation;
+
+    Sound sound;
 
     // The player's texture used to display the sprite.
     sf::Texture* playerTexture;

@@ -92,7 +92,15 @@ sf::Vector2f Enemy::GetPosition() const
 
 sf::FloatRect Enemy::GetBounds() const
 {
-    return EnemyShape.getGlobalBounds();
+    // Get the original bounds of the enemy shape
+    sf::FloatRect originalBounds = EnemyShape.getGlobalBounds();
+
+
+    // Create a smaller bounding box based on the scaling factor
+    return sf::FloatRect(originalBounds.left + (originalBounds.width * (1 - hitBoxScale)) / 2,
+        originalBounds.top + (originalBounds.height * (1 - hitBoxScale)) / 2,
+        originalBounds.width * hitBoxScale,
+        originalBounds.height * hitBoxScale);
 }
 
 bool Enemy::IsDead() const

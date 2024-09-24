@@ -1,6 +1,7 @@
 #pragma once
 #include "BulletManager.h"
 #include "Enemy.h"
+#include "Sound.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -37,8 +38,9 @@ public:
 private:
 
     const float BASE_SPEED = 100.0f; // Initial speed of enemies
-    const float SPEED_INCREMENT = 150.0f; // Speed increment per death
+    const float SPEED_INCREMENT = 75.0f; // Speed increment per death
 
+    Sound sound;
     sf::Texture* DeathTexture;
     std::vector<Enemy> enemies; // Stores all active enemies
     float enemySpeed; // Base speed for enemies

@@ -6,11 +6,14 @@ Game::Game() :
         sf::Style::Close | sf::Style::Titlebar), // Create a window with the given size and title.
     bulletmanager(ResourceManager::getInstance().getTexture(PlAYER_BULLET__FILEPATH), 300.0f), // Initialize bullet manager with texture and speed.
     player(&ResourceManager::getInstance().getTexture(PlAYER_FILEPATH), 0.1f, sf::Vector2f(PlayerStartingX, PlayerStartingY), bulletmanager) // Initialize player with texture, speed, position, and bullet manager.
-    , enemymanager(&ResourceManager::getInstance().getTexture(ENEMY_EXPLOSION_FILEPATH), 100.f)
+    , enemymanager(&ResourceManager::getInstance().getTexture(ENEMY_EXPLOSION_FILEPATH), 100.f),
+    sound()
 {
     // Set the texture for the background and scale it to fit the window.
     SpaceBackground.setTexture(ResourceManager::getInstance().getTexture(BACKGROUND_FILEPATH));
     SpaceBackground.scale(3.375f, 4.0f); // Adjust the background to cover the entire window.
+
+    sound.PlayBackgroundSound();
 }
 
 // Main game loop: Runs the game, processing events, updating objects, and rendering.
@@ -52,7 +55,6 @@ void Game::Update(float deltaTime)
     enemymanager.update(deltaTime);
     bulletmanager.update(deltaTime); // Update the position of all bullets.
     player.Update(deltaTime); // Update the player's position and actions.
-
 }
 
 // Renders the background, bullets, and player to the window.
@@ -77,11 +79,12 @@ void Game::checkEnemyCollisions(std::vector<Enemy>& enemies, std::vector<Bullet>
         for (size_t i = 0; i < bullets.size(); ++i) {
             if (enemy.GetBounds().intersects(bullets[i].GetBounds()) && !enemy.IsDead()) {
                 // Collision detected between enemy and bullet
-                std::cout << "Collision detected!" << std::endl;
+                //std::cout << "Collision detected!" << std::endl;
 
                 // Set the enemy as dead to trigger the death animation
                 enemy.SetDead(true);
                 enemymanager.incrementDeathCount();
+                sound.PlayEnemyDeathSound();
 
                 // Remove the bullet that hit the enemy
                 bullets.erase(bullets.begin() + i);

@@ -1,6 +1,5 @@
 #include "Enemy.h"
 
-
 Enemy::Enemy(sf::Texture* texture, sf::Texture* deathTexture, float speed, sf::Vector2f Position, unsigned char Type)
     : EnemyTexture(texture), speed(speed), Type(Type), StartingPosition(Position), DeathTexture(deathTexture),
     animation(texture, sf::Vector2u(2, 1), SwitchToNextTime * 2.f),
@@ -12,13 +11,12 @@ Enemy::Enemy(sf::Texture* texture, sf::Texture* deathTexture, float speed, sf::V
     EnemyShape.setPosition(Position);
     EnemyShape.setTexture(EnemyTexture);
 
-    // Initialize Direction to Right 
-    Direction = 1;
-
     Dead = false;
-
     MoveCoolDown = 0.0; // Initialize cooldown for shooting.
     MoveCoolDownMax = 100; // Maximum time between two consecutive shots.
+
+    shootCoolDown = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / 2.0)); // Initialize as a Random Number to make the cooldown Different for each enemy fix enemies firing in patches
+    MaxShootCoolDown = 2.f;
 }
 
 void Enemy::Update(float deltaTime)
@@ -44,25 +42,7 @@ void Enemy::Update(float deltaTime)
     if (MoveCoolDown > 0.f) {
         MoveCoolDown -= deltaTime; // Decrease cooldown
     }
-    if (MoveCoolDown <= 0.0f)
-    {
-        // Move the enemy in the current direction
-        if (Direction == 1) // Move Right
-            EnemyShape.move(speed * deltaTime, 0);
-        else if (Direction == -1) // Move Left
-            EnemyShape.move(-speed * deltaTime, 0);
 
-        // Check for boundary conditions to switch direction and move down
-        if (EnemyShape.getPosition().x <= StartingPosition.x - 1) {
-            Direction = 1; // Change direction to right
-            EnemyShape.move(0, 10000 * deltaTime); // Move down
-        }
-        else if (EnemyShape.getPosition().x >= StartingPosition.x + 25) {
-            Direction = -1; // Change direction to left
-            EnemyShape.move(0, 10000 * deltaTime); // Move down
-        }
-        MoveCoolDown = MoveCoolDownMax;
-    }
     // Update Enemy animation.
     animation.Update(0, deltaTime);
     EnemyShape.setTextureRect(animation.TextureRect);
@@ -73,7 +53,6 @@ void Enemy::Draw(sf::RenderWindow& window) {
         window.draw(EnemyShape); // Only draw if the enemy isn't dead or if it's still visible
     }
 }
-
 
 void Enemy::SetPosition(sf::Vector2f Position)
 {
@@ -95,12 +74,13 @@ sf::FloatRect Enemy::GetBounds() const
     // Get the original bounds of the enemy shape
     sf::FloatRect originalBounds = EnemyShape.getGlobalBounds();
 
-
     // Create a smaller bounding box based on the scaling factor
-    return sf::FloatRect(originalBounds.left + (originalBounds.width * (1 - hitBoxScale)) / 2,
+    return sf::FloatRect(
+        originalBounds.left + (originalBounds.width * (1 - hitBoxScale)) / 2,
         originalBounds.top + (originalBounds.height * (1 - hitBoxScale)) / 2,
         originalBounds.width * hitBoxScale,
-        originalBounds.height * hitBoxScale);
+        originalBounds.height * hitBoxScale
+    );
 }
 
 bool Enemy::IsDead() const
@@ -111,6 +91,13 @@ bool Enemy::IsDead() const
 void Enemy::SetDead(bool newDead)
 {
     Dead = newDead;
+    Deadtime = clock.getElapsedTime();
+
+}
+
+sf::Int32 Enemy::getDeadTime()const
+{
+    return Deadtime.asMilliseconds();
 }
 
 void Enemy::SetDeathAnimation()
@@ -118,8 +105,38 @@ void Enemy::SetDeathAnimation()
     EnemyShape.setTexture(DeathTexture);
 }
 
+bool Enemy::ShouldShoot(const sf::Vector2f& playerPosition)
+{
+    float distance = std::sqrt(std::pow(EnemyShape.getPosition().x - playerPosition.x, 2) +
+        std::pow(EnemyShape.getPosition().y - playerPosition.y, 2));
+
+    // Base shooting probability
+    float shootProbability = 5.f; // Base probability to shoot (20%)
+    // Increase probability if close to the player
+    if (distance < 200.0f) { // Change this value to set the proximity threshold
+        shootProbability += (1.0f - (distance / 200.0f)) * 50.0f; // Increase probability as distance decreases
+    }
+
+    // Random chance to shoot based on calculated probability
+    return rand() % 100 < shootProbability;
+
+}
+
 void Enemy::SetSpeed(float NewSpeed) {
     speed = NewSpeed;
 }
 
+float Enemy::GetShootCoolDown()const
+{
+    return shootCoolDown;
+}
 
+void Enemy::SetShootCoolDown(float Value)
+{
+    shootCoolDown = Value;
+}
+
+float Enemy::GetMaxShootCoolDown()const
+{
+    return MaxShootCoolDown;
+}

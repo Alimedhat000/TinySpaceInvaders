@@ -1,8 +1,10 @@
 #pragma once
 #include "Animation.h"
 #include "Global.h"
+#include <random>
 #include "ResourceManager.h"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 
 // The Enemy Class represents the Enemy SpaceInvaders
@@ -35,9 +37,19 @@ public:
 
     void SetDead(bool newDead);
 
+    sf::Int32 getDeadTime()const;
+
     void SetDeathAnimation();
 
+    bool ShouldShoot(const sf::Vector2f& PlayerPosition);
+
     void SetSpeed(float NewSpeed);
+
+    float GetShootCoolDown()const;
+    void SetShootCoolDown(float Value);
+
+    float GetMaxShootCoolDown()const;
+
 
 private:
     // Handles animation frames for the Enemy sprite.
@@ -50,12 +62,15 @@ private:
 
     sf::Vector2f StartingPosition;
 
+    sf::Clock clock;
 
     sf::Texture* DeathTexture;
     // Current Moving Direction of the Enemy (-1 - Left, 0 - Down, 1 - Right)
     char Direction;
 
     bool Dead;
+
+    sf::Time Deadtime;
 
     // The Type of the enemy
     unsigned char Type;
@@ -69,8 +84,10 @@ private:
     sf::RectangleShape EnemyShape;
 
     // Time control for firing bullets.
+    float shootCoolDown;
+    float MaxShootCoolDown;
+
     unsigned int  MoveCoolDown;
     unsigned int MoveCoolDownMax; // Maximum cooldown time between shots.
 
 };
-

@@ -21,7 +21,7 @@ public:
     // Main game loop: processes events, updates game state, and renders the game.
     void run();
 
-    void checkEnemyCollisions(std::vector<Enemy>& enemies, std::vector<Bullet>& bullets);
+    void checkEnemyCollisions(std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, float deltatime);
 private:
     // Handles user input and window events.
     void ProccessEvents();

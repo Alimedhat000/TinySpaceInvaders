@@ -4,16 +4,16 @@
 Game::Game() :
     window(sf::VideoMode(ScreenHeight, ScreenWidth), "TinySpaceInvaders",
         sf::Style::Close | sf::Style::Titlebar), // Create a window with the given size and title.
-    bulletmanager(ResourceManager::getInstance().getTexture(PlAYER_BULLET__FILEPATH), 300.0f), // Initialize bullet manager with texture and speed.
-    player(&ResourceManager::getInstance().getTexture(PlAYER_FILEPATH), 0.1f, sf::Vector2f(PlayerStartingX, PlayerStartingY), bulletmanager) // Initialize player with texture, speed, position, and bullet manager.
-    , enemymanager(&ResourceManager::getInstance().getTexture(ENEMY_EXPLOSION_FILEPATH), 100.f),
+    bulletmanager(ResourceManager::getInstance().getTexture(PlAYER_BULLET_FILEPATH), 300.0f, DIRECTION_UP), // Initialize bullet manager with texture and speed.
+    player(&ResourceManager::getInstance().getTexture(PlAYER_FILEPATH), 0.2f, sf::Vector2f(PlayerStartingX, PlayerStartingY), bulletmanager) // Initialize player with texture, speed, position, and bullet manager.
+    , enemymanager(&ResourceManager::getInstance().getTexture(ENEMY_EXPLOSION_FILEPATH), 25.f),
     sound()
 {
     // Set the texture for the background and scale it to fit the window.
     SpaceBackground.setTexture(ResourceManager::getInstance().getTexture(BACKGROUND_FILEPATH));
     SpaceBackground.scale(3.375f, 4.0f); // Adjust the background to cover the entire window.
 
-    sound.PlayBackgroundSound();
+    sound.PlayBackgroundSound() // Start The background Music
 }
 
 // Main game loop: Runs the game, processing events, updating objects, and rendering.
@@ -51,8 +51,8 @@ void Game::ProccessEvents()
 // Updates all game objects, such as the player and bullets.
 void Game::Update(float deltaTime)
 {
-    checkEnemyCollisions(enemymanager.getEnemies(), bulletmanager.getBullets());
-    enemymanager.update(deltaTime);
+    checkEnemyCollisions(enemymanager.getEnemies(), bulletmanager.getBullets(), deltaTime);
+    enemymanager.update(deltaTime, player.GetPosition());
     bulletmanager.update(deltaTime); // Update the position of all bullets.
     player.Update(deltaTime); // Update the player's position and actions.
 }
@@ -74,7 +74,7 @@ void Game::RenderBackGround()
     window.draw(SpaceBackground); // Draw the background sprite to the window.
 }
 
-void Game::checkEnemyCollisions(std::vector<Enemy>& enemies, std::vector<Bullet>& bullets) {
+void Game::checkEnemyCollisions(std::vector<Enemy>& enemies, std::vector<Bullet>& bullets, float deltatime) {
     for (auto& enemy : enemies) {
         for (size_t i = 0; i < bullets.size(); ++i) {
             if (enemy.GetBounds().intersects(bullets[i].GetBounds()) && !enemy.IsDead()) {

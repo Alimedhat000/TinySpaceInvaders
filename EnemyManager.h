@@ -1,5 +1,6 @@
 #pragma once
 #include "BulletManager.h"
+#include "ResourceManager.h"
 #include "Enemy.h"
 #include "Sound.h"
 #include <vector>
@@ -18,7 +19,7 @@ public:
     void spawnEnemy(sf::Vector2f position, unsigned char type);
 
     // Updates all enemies
-    void update(float deltaTime);
+    void update(float deltaTime, sf::Vector2f PlayerPosition);
 
     // Draws all enemies on the screen
     void draw(sf::RenderWindow& window);
@@ -37,10 +38,14 @@ public:
 
 private:
 
-    const float BASE_SPEED = 100.0f; // Initial speed of enemies
-    const float SPEED_INCREMENT = 75.0f; // Speed increment per death
+    const float BASE_SPEED = 25.0f; // Initial speed of enemies
+    const float SPEED_INCREMENT = 2.f; // Speed increment per death
 
+    int Direction; // 1 for right, -1 for left
+    float moveDownAmount{ 01.f };
+    sf::Clock clock;
     Sound sound;
+    BulletManager EnemyBullet;
     sf::Texture* DeathTexture;
     std::vector<Enemy> enemies; // Stores all active enemies
     float enemySpeed; // Base speed for enemies

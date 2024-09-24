@@ -66,7 +66,7 @@ private:
 
     sf::Texture* DeathTexture;
     // Current Moving Direction of the Enemy (-1 - Left, 0 - Down, 1 - Right)
-    char Direction;
+    char Direction{ 1 };
 
     bool Dead;
 
@@ -77,8 +77,6 @@ private:
 
     // Speed at which the Enemy moves.
     float speed;
-
-    float hitBoxScale{ 0.3f };
 
     // Rectangle shape used to represent the Enemy.
     sf::RectangleShape EnemyShape;

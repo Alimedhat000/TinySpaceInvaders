@@ -35,6 +35,12 @@ public:
     // Fires a bullet by calling the BulletManager.
     void shoot(BulletManager& bulletmanager);
 
+    void SetPlayerLives(int value);
+
+    int GetPlayerLives()const;
+
+    bool CheckOutOfLives()const;
+
 private:
     // Handles animation frames for the player sprite.
     Animation animation;
@@ -52,6 +58,8 @@ private:
 
     // Reference to the BulletManager to handle bullets shot by the player.
     BulletManager& bulletmanager;
+
+    int PlayerLives{ 5 };
 
     // Time control for firing bullets.
     float ShootCoolDown;

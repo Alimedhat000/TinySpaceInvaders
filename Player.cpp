@@ -3,11 +3,11 @@
 // Constructor: Initializes the player with texture, speed, initial position, and a reference to the bullet manager.
 Player::Player(sf::Texture* texture, float speed, sf::Vector2f Position, BulletManager& bulletmanager)
     : playerTexture(texture), speed(speed), bulletmanager(bulletmanager),
-    animation(texture, sf::Vector2u(5, 1), SwitchToNextTime) // Initialize animation with texture and image count.
+    animation(texture, sf::Vector2u(6, 1), SwitchToNextTime) // Initialize animation with texture and image count.
     , sound()
 {
     // Set the size of the player, origin point, texture, and initial position.
-    playerShape.setSize(sf::Vector2f(GlobalSize, GlobalSize)); // Set player's width and height.
+    playerShape.setSize(sf::Vector2f(GlobalSize * 1.1f, GlobalSize * 1.1f)); // Set player's width and height.
     playerShape.setOrigin(playerShape.getSize() / 2.0f); // Set origin to the center of the player.
     playerShape.setTexture(playerTexture); // Apply texture to the player shape.
     playerShape.setPosition(Position); // Set player's initial position on the screen.
@@ -68,7 +68,16 @@ sf::Vector2f Player::GetPosition() const
 // Returns the player's bounding box for collision detection.
 sf::FloatRect Player::GetBounds() const
 {
-    return playerShape.getGlobalBounds(); // Returns the rectangular bounds of the player.
+    // Get the original bounds of the player shape
+    sf::FloatRect originalBounds = playerShape.getGlobalBounds();
+
+    // Create a smaller bounding box based on the scaling factor
+    return sf::FloatRect(
+        originalBounds.left + (originalBounds.width * (1 - hitBoxScale)) / 2,
+        originalBounds.top + (originalBounds.height * (1 - hitBoxScale)) / 2,
+        originalBounds.width * hitBoxScale,
+        originalBounds.height * hitBoxScale
+    );
 }
 
 // Shoots a bullet from the player's current position.
@@ -84,4 +93,19 @@ void Player::shoot(BulletManager& bulletmanager)
 
     // Pass the bullet position to the BulletManager for firing.
     bulletmanager.shoot(bulletPosition);
+}
+
+void Player::SetPlayerLives(int value)
+{
+    PlayerLives = value;
+}
+
+int Player::GetPlayerLives() const
+{
+    return PlayerLives;
+}
+
+bool Player::CheckOutOfLives() const
+{
+    return PlayerLives <= 0;
 }

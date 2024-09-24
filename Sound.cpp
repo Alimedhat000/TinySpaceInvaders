@@ -30,6 +30,15 @@ Sound::Sound()
         EnemyMoveSound.setBuffer(EnemyMoveSoundBuffer);
         EnemyMoveSound.setVolume(30);
     }
+
+    if (EnemyShootSoundBuffer.loadFromFile(ENEMY_SHOOT_SOUND_FILEPATH)) {
+        EnemyShootSound.setBuffer(EnemyShootSoundBuffer);
+        EnemyShootSound.setVolume(30);
+    }
+    if (HitSoundBuffer.loadFromFile(PLAYER_HIT_SOUND_FILEPATH)) {
+        HitSound.setBuffer(HitSoundBuffer);
+        HitSound.setVolume(30);
+    }
 }
 
 void Sound::PlayShootSound()
@@ -38,10 +47,22 @@ void Sound::PlayShootSound()
     ShootSound.play();
 }
 
+void Sound::PlayhitSound()
+{
+
+    HitSound.play();
+}
+
 void Sound::PlayEnemyDeathSound()
 {
 
     EnemyDeathSound.play();
+}
+
+void Sound::PlayEnemyShootSound()
+{
+
+    EnemyShootSound.play();
 }
 
 void Sound::PlayEnemyMoveSound()
@@ -83,5 +104,13 @@ void Sound::SetEnemyMoveSoundSpeed(int DeathCount)
 void Sound::PlayBackgroundSound()
 {
 
-    //BackGroundSound.play();
+    if (BackGroundSound.getStatus() != sf::Sound::Playing) {
+        BackGroundSound.play();
+    }
+
+}
+
+void Sound::StopBackgroundSound()
+{
+    BackGroundSound.stop();
 }

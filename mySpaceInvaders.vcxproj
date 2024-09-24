@@ -146,9 +146,12 @@
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -158,9 +161,13 @@
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="Text.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\Background.png" />
@@ -181,10 +188,20 @@
     <Image Include="Assets\Images\Ufo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="Assets\Sounds\backgroundSong.wav" />
     <Media Include="Assets\Sounds\bang.wav" />
     <Media Include="Assets\Sounds\explosion.wav" />
     <Media Include="Assets\Sounds\invaderkilled.wav" />
+    <Media Include="Assets\Sounds\invaderMove.wav" />
+    <Media Include="Assets\Sounds\invaderMoveX1.25.wav" />
+    <Media Include="Assets\Sounds\invaderMoveX1.5.wav" />
+    <Media Include="Assets\Sounds\invaderMoveX1.75.wav" />
+    <Media Include="Assets\Sounds\invaderMoveX2.wav" />
     <Media Include="Assets\Sounds\shoot.wav" />
+    <Media Include="Assets\Sounds\ufoSound.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="mySpaceInvaders.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

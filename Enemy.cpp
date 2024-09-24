@@ -111,7 +111,7 @@ bool Enemy::ShouldShoot(const sf::Vector2f& playerPosition)
         std::pow(EnemyShape.getPosition().y - playerPosition.y, 2));
 
     // Base shooting probability
-    float shootProbability = 5.f; // Base probability to shoot (20%)
+    float shootProbability = 2.5f; // Base probability to shoot (20%)
     // Increase probability if close to the player
     if (distance < 200.0f) { // Change this value to set the proximity threshold
         shootProbability += (1.0f - (distance / 200.0f)) * 50.0f; // Increase probability as distance decreases

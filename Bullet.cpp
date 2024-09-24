@@ -7,7 +7,7 @@ Bullet::Bullet(sf::Texture* texture, float speed, sf::Vector2f Position, bool Di
     this->speed = speed; // Set the speed of the bullet.
     BulletSprite.setTexture(*texture); // Set the texture for the bullet's sprite.
     BulletSprite.setPosition(Position); // Set the initial position of the bullet.
-    BulletSprite.scale(1.5f, 1.5f); // Scale the bullet sprite to make it larger.
+    BulletSprite.scale(2.f, 2.f); // Scale the bullet sprite to make it larger.
 }
 
 // Updates the bullet's position based on the elapsed time (deltaTime) and its speed.

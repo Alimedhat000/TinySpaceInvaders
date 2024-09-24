@@ -13,7 +13,7 @@ Game::Game() :
     SpaceBackground.setTexture(ResourceManager::getInstance().getTexture(BACKGROUND_FILEPATH));
     SpaceBackground.scale(3.375f, 4.0f); // Adjust the background to cover the entire window.
 
-    sound.PlayBackgroundSound() // Start The background Music
+    sound.PlayBackgroundSound(); // Start The background Music
 }
 
 // Main game loop: Runs the game, processing events, updating objects, and rendering.

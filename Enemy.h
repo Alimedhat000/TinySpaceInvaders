@@ -41,14 +41,16 @@ public:
 
     void SetDeathAnimation();
 
-    bool ShouldShoot(const sf::Vector2f& PlayerPosition);
+    bool ShouldShoot(const sf::Vector2f& PlayerPosition, int level);
 
     void SetSpeed(float NewSpeed);
 
     float GetShootCoolDown()const;
-    void SetShootCoolDown(float Value);
+    void SetShootCoolDown(float Value, int level);
 
     float GetMaxShootCoolDown()const;
+
+    bool GetAmILoaded()const;
 
 
 private:
@@ -77,6 +79,8 @@ private:
 
     // Speed at which the Enemy moves.
     float speed;
+
+    bool AmILoaded;
 
     // Rectangle shape used to represent the Enemy.
     sf::RectangleShape EnemyShape;

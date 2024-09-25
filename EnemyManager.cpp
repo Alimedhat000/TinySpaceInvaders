@@ -22,6 +22,7 @@ EnemyManager::EnemyManager(sf::Texture* texture, float speed)
             enemyTextures[type] = std::move(texture); // Move texture into the map
         }
     }
+    FinishedLoading = false;
     GenerateEnemies(6, 15, 2);
     //spawnEnemy(sf::Vector2f(100.f, 100.f), 0);
 
@@ -42,6 +43,7 @@ void EnemyManager::GenerateEnemies(int rows, int cols, int rowsPerType) {
             }
         }
     }
+    FinishedLoading = true;
 
 }
 
@@ -81,13 +83,13 @@ void EnemyManager::update(float deltaTime, sf::Vector2f PlayerPosition) {
 
     // Update each enemy's position and ShootCoolDown
     for (auto& enemy : enemies) {
-        enemy.SetShootCoolDown(enemy.GetShootCoolDown() - deltaTime);
+        enemy.SetShootCoolDown(enemy.GetShootCoolDown() - deltaTime, CurLevel);
         if (enemy.GetShootCoolDown() <= 0) {
-            if (enemy.ShouldShoot(PlayerPosition)) {
+            if (enemy.ShouldShoot(PlayerPosition, CurLevel)) {
                 EnemyBullet.shoot(enemy.GetPosition());
                 sound.PlayEnemyShootSound(); // play Shooting sound
             }
-            enemy.SetShootCoolDown(enemy.GetMaxShootCoolDown());
+            enemy.SetShootCoolDown(enemy.GetMaxShootCoolDown(), CurLevel);
         }
 
 
@@ -164,3 +166,9 @@ int EnemyManager::getDeathNumber() const
 int EnemyManager::getCurLevel()const {
     return CurLevel;
 }
+
+bool EnemyManager::getLoadingStatus() const
+{
+    return FinishedLoading;
+}
+

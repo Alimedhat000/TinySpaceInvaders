@@ -144,7 +144,7 @@ void Game::RenderLevelCounter()
 void Game::checkEnemyCollisions(std::vector<Enemy>& enemies, std::vector<Bullet>& bullets) {
     for (auto& enemy : enemies) {
         for (size_t i = 0; i < bullets.size(); ++i) {
-            if (enemy.GetBounds().intersects(bullets[i].GetBounds()) && !enemy.IsDead()) {
+            if (enemy.GetBounds().intersects(bullets[i].GetBounds()) && !enemy.IsDead() && enemy.GetAmILoaded() && enemymanager.getLoadingStatus()) {
                 // Collision detected between enemy and bullet
                 //std::cout << "Collision detected!" << std::endl;
 

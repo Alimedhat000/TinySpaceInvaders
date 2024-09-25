@@ -35,6 +35,7 @@ public:
 
     int getDeathNumber()const;
     int getCurLevel()const;
+    bool getLoadingStatus()const;
 
 
 
@@ -57,6 +58,8 @@ private:
     std::map<unsigned char, sf::Texture> enemyTextures; // Textures for the enemies
     int TotalNumberOfDeaths;
     int NumberOfDeaths;
+
+    bool FinishedLoading;
 
     int CurLevel{ 1 };
 };
